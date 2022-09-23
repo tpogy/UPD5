@@ -201,14 +201,16 @@ local function upgrade()
             v.Name == getgenv().unit1 or v.Name == getgenv().unit2 or v.Name == getgenv().unit3 or
                 v.Name == getgenv().unit4 or
                 v.Name == getgenv().unit5 or
-                v.Name == getgenv().unit6 and v._stats.upgrade.Value < 20
+                v.Name == getgenv().unit6
          then
-            local args = {
-                [1] = v
-            }
-            game:GetService("ReplicatedStorage").endpoints.client_to_server.upgrade_unit_ingame:InvokeServer(
-                unpack(args)
-            )
+            if v._stats.upgrade.Value < 20 then
+                local args = {
+                    [1] = v
+                }
+                game:GetService("ReplicatedStorage").endpoints.client_to_server.upgrade_unit_ingame:InvokeServer(
+                    unpack(args)
+                )
+            end
         end
     end
 end
@@ -328,13 +330,10 @@ elseif game.PlaceId == 8349889591 then
     task.wait(1)
 
     repeat
-        Hit_ice()
-        task.wait(0.3)
         upgrade()
         task.wait(0.3)
-        useskill()
-        task.wait(0.3)
-    until game:GetService("Workspace")["_wave_num"].Value >= getgenv().wavetolose or game:GetService("Workspace")["_DATA"].GameFinished.Value == true
+    until game:GetService("Workspace")["_wave_num"].Value >= getgenv().wavetolose or
+        game:GetService("Workspace")["_DATA"].GameFinished.Value == true
 
     while true do
         task.wait(0.3)
