@@ -327,21 +327,14 @@ elseif game.PlaceId == 8349889591 then
     end
     task.wait(1)
 
-    while true do
+    repeat
         Hit_ice()
         task.wait(0.3)
         upgrade()
         task.wait(0.3)
         useskill()
         task.wait(0.3)
-        if
-            game:GetService("Workspace")["_wave_num"].Value >= getgenv().wavetolose or
-                game:GetService("Workspace")["_DATA"].GameFinished.Value == true
-         then
-            break
-        end
-    end
-    task.wait(1)
+    until game:GetService("Workspace")["_wave_num"].Value >= getgenv().wavetolose or game:GetService("Workspace")["_DATA"].GameFinished.Value == true
 
     while true do
         task.wait(0.3)
