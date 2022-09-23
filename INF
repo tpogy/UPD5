@@ -228,7 +228,7 @@ end
 local function Hit_ice()
     for i, v in next, game:GetService("Workspace")["_UNITS"]:GetChildren() do
         if v.Name == "akainu" then
-            game:GetService("Workspace")["_UNITS"].v["_stats"].priority.Value = strongest
+            v["_stats"].priority.Value = "strongest"
         end
     end
 end
