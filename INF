@@ -5,6 +5,22 @@ game:GetService("Players").LocalPlayer.Idled:connect(
     end
 )
 
+local function buymerchant()
+    for i, v in next, game:GetService("Workspace")["travelling_merchant"].stand.items:GetChildren() do
+        local stritem = tostring(v)
+        item = string.gsub(stritem, "%d+", "")
+        if item == "star_remnant" then
+            local args = {
+                [1] = stritem
+            }
+
+            game:GetService("ReplicatedStorage").endpoints.client_to_server.buy_travelling_merchant_item:InvokeServer(
+                unpack(args)
+            )
+        end
+    end
+end
+
 local function join() -- join teleporter
     local args = {
         [1] = "_lobbytemplategreen6"
@@ -302,13 +318,15 @@ end
 
 if game.PlaceId == 8304191830 then
     while true do
+        task.wait(5)
+        buymerchant()
+        task.wait(1)
         join()
         task.wait(1)
         Create()
         task.wait(1)
         start2()
-        task.wait()
-        task.wait(5)
+        task.wait(1)
     end
 elseif game.PlaceId == 8349889591 then
     repeat
