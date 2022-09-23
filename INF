@@ -4,8 +4,9 @@ game:GetService("Players").LocalPlayer.Idled:connect(
         game:GetService("VirtualUser"):ClickButton2(Vector2.new())
     end
 )
+ --
 
-local function buymerchant()
+--[[local function buymerchant()
     for i, v in next, game:GetService("Workspace")["travelling_merchant"].stand.items:GetChildren() do
         local stritem = tostring(v)
         item = string.gsub(stritem, "%d+", "")
@@ -19,9 +20,7 @@ local function buymerchant()
             )
         end
     end
-end
-
-local function join() -- join teleporter
+end]] local function join() -- join teleporter
     local args = {
         [1] = "_lobbytemplategreen6"
     }
