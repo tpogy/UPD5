@@ -4,7 +4,7 @@ game:GetService("Players").LocalPlayer.Idled:connect(
         game:GetService("VirtualUser"):ClickButton2(Vector2.new())
     end
 )
- --
+--
 
 --[[local function buymerchant()
     for i, v in next, game:GetService("Workspace")["travelling_merchant"].stand.items:GetChildren() do
@@ -63,6 +63,41 @@ local function start() -- starts the game
     task.wait(0.5)
     if game:GetService("Workspace")["_wave_num"].Value < 1 then
         game:GetService("ReplicatedStorage").endpoints.client_to_server.vote_start:InvokeServer()
+    end
+end
+
+local function placenamek()
+    if
+        game:GetService("Workspace")["_wave_num"].Value < getgenv().wavetolose and
+            game.Players.LocalPlayer["_stats"].resource.Value >= 500
+     then
+        local args = {
+            [1] = getgenv().id7,
+            [2] = CFrame.new(-2949.064453125, 91.80620574951172, -698.9860229492188) * CFrame.Angles(0, -0, -0)
+        }
+        game:GetService("ReplicatedStorage").endpoints.client_to_server.spawn_unit:InvokeServer(unpack(args))
+        task.wait(1)
+
+        local args = {
+            [1] = getgenv().id7,
+            [2] = CFrame.new(-2948.78027, 91.80620574951172, -700.842041) * CFrame.Angles(0, -0, -0)
+        }
+        game:GetService("ReplicatedStorage").endpoints.client_to_server.spawn_unit:InvokeServer(unpack(args))
+        task.wait(1)
+
+        local args = {
+            [1] = getgenv().id7,
+            [2] = CFrame.new(-2948.72803, 91.80620574951172, -703.189758) * CFrame.Angles(0, -0, -0)
+        }
+        game:GetService("ReplicatedStorage").endpoints.client_to_server.spawn_unit:InvokeServer(unpack(args))
+        task.wait(1)
+
+        local args = {
+            [1] = getgenv().id7,
+            [2] = CFrame.new(-2948.80151, 91.80620574951172, -705.302307) * CFrame.Angles(0, -0, -0)
+        }
+        game:GetService("ReplicatedStorage").endpoints.client_to_server.spawn_unit:InvokeServer(unpack(args))
+        task.wait(1)
     end
 end
 
@@ -216,7 +251,8 @@ local function upgrade()
             v.Name == getgenv().unit1 or v.Name == getgenv().unit2 or v.Name == getgenv().unit3 or
                 v.Name == getgenv().unit4 or
                 v.Name == getgenv().unit5 or
-                v.Name == getgenv().unit6
+                v.Name == getgenv().unit6 or
+                v.Name == getgenv().unit7
          then
             if v._stats.upgrade.Value < 20 then
                 local args = {
@@ -257,7 +293,8 @@ local function sell()
                 v.Name == getgenv().unit1 or v.Name == getgenv().unit2 or v.Name == getgenv().unit3 or
                     v.Name == getgenv().unit4 or
                     v.Name == getgenv().unit5 or
-                    v.Name == getgenv().unit6
+                    v.Name == getgenv().unit6 or
+                    v.Name == getgenv().unit7
              then
                 local args = {
                     [1] = v
@@ -334,31 +371,42 @@ elseif game.PlaceId == 8349889591 then
     task.wait(15) -- Waits for the game remotes to load (This is needed)
     game.Players.LocalPlayer.PlayerGui.MessageGui.Enabled = false -- Removes the annoying error messages
 
-    while true do
+    if game.Players.LocalPlayer.Name == getgenv().farmgems1 then
         task.wait()
         diseff()
         start()
-        place()
-        upgradefarm()
-        if game.Players.LocalPlayer["_stats"].resource.Value >= 8000 then
-            break
-        end
-    end
-    task.wait(1)
-
-    repeat
+        placenamek()
         upgrade()
-        task.wait(0.3)
-    until game:GetService("Workspace")["_wave_num"].Value >= getgenv().wavetolose or
-        game:GetService("Workspace")["_DATA"].GameFinished.Value == true
-
-    while true do
-        task.wait(0.3)
         sell()
-        task.wait(0.3)
         webhook()
-        task.wait(0.3)
         teleport()
-        task.wait(5)
+    else
+        while true do
+            task.wait()
+            diseff()
+            start()
+            place()
+            upgradefarm()
+            if game.Players.LocalPlayer["_stats"].resource.Value >= 8000 then
+                break
+            end
+        end
+        task.wait(1)
+
+        repeat
+            upgrade()
+            task.wait(0.3)
+        until game:GetService("Workspace")["_wave_num"].Value >= getgenv().wavetolose or
+            game:GetService("Workspace")["_DATA"].GameFinished.Value == true
+
+        while true do
+            task.wait(0.3)
+            sell()
+            task.wait(0.3)
+            webhook()
+            task.wait(0.3)
+            teleport()
+            task.wait(5)
+        end
     end
 end
