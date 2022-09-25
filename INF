@@ -66,6 +66,14 @@ local function start2() -- Starts the teleport
     game:GetService("ReplicatedStorage").endpoints.client_to_server.request_start_game:InvokeServer(unpack(args))
 end
 
+local function startnamek() -- Starts the teleport
+    local args = {
+        [1] = "_lobbytemplategreen7"
+    }
+
+    game:GetService("ReplicatedStorage").endpoints.client_to_server.request_start_game:InvokeServer(unpack(args))
+end
+
 local function diseff()
     if game:GetService("Players").LocalPlayer["_settings"]["low_quality_textures"].Value == false then
         game:GetService("Players").LocalPlayer["_settings"]["low_quality_textures"].Value = true
@@ -379,7 +387,7 @@ if game.PlaceId == 8304191830 then
             task.wait(1)
             Createnamek()
             task.wait(1)
-            start2()
+            startnamek()
             task.wait(1)
         end
     else
