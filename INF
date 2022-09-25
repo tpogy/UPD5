@@ -375,7 +375,7 @@ if game.PlaceId == 8304191830 then
     if game.Players.LocalPlayer.Name == getgenv().farmgems1 then
         while true do
             task.wait(5)
-            join()
+            joinnamek()
             task.wait(1)
             Createnamek()
             task.wait(1)
