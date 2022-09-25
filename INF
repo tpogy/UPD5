@@ -28,10 +28,29 @@ end]] local function join() -- join teleporter
     game:GetService("ReplicatedStorage").endpoints.client_to_server.request_join_lobby:InvokeServer(unpack(args))
 end
 
+local function joinnamek() -- join teleporter
+    local args = {
+        [1] = "_lobbytemplategreen7"
+    }
+
+    game:GetService("ReplicatedStorage").endpoints.client_to_server.request_join_lobby:InvokeServer(unpack(args))
+end
+
 local function Create() -- Creates the map
     local args = {
         [1] = "_lobbytemplategreen6",
         [2] = "magnolia_infinite",
+        [3] = true,
+        [4] = "Hard"
+    }
+
+    game:GetService("ReplicatedStorage").endpoints.client_to_server.request_lock_level:InvokeServer(unpack(args))
+end
+
+local function Createnamek() -- Creates the map
+    local args = {
+        [1] = "_lobbytemplategreen7",
+        [2] = "namek_infinite",
         [3] = true,
         [4] = "Hard"
     }
@@ -353,16 +372,28 @@ local function webhook()
 end
 
 if game.PlaceId == 8304191830 then
-    while true do
-        task.wait(5)
-        --buymerchant()
-        task.wait(1)
-        join()
-        task.wait(1)
-        Create()
-        task.wait(1)
-        start2()
-        task.wait(1)
+    if game.Players.LocalPlayer.Name == getgenv().farmgems1 then
+        while true do
+            task.wait(5)
+            join()
+            task.wait(1)
+            Createnamek()
+            task.wait(1)
+            start2()
+            task.wait(1)
+        end
+    else
+        while true do
+            task.wait(5)
+            --buymerchant()
+            task.wait(1)
+            join()
+            task.wait(1)
+            Create()
+            task.wait(1)
+            start2()
+            task.wait(1)
+        end
     end
 elseif game.PlaceId == 8349889591 then
     repeat
@@ -372,14 +403,16 @@ elseif game.PlaceId == 8349889591 then
     game.Players.LocalPlayer.PlayerGui.MessageGui.Enabled = false -- Removes the annoying error messages
 
     if game.Players.LocalPlayer.Name == getgenv().farmgems1 then
-        task.wait()
-        diseff()
-        start()
-        placenamek()
-        upgrade()
-        sell()
-        webhook()
-        teleport()
+        while true do
+            task.wait()
+            diseff()
+            start()
+            placenamek()
+            upgrade()
+            sell()
+            webhook()
+            teleport()
+        end
     else
         while true do
             task.wait()
