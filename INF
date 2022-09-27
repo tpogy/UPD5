@@ -6,18 +6,20 @@ game:GetService("Players").LocalPlayer.Idled:connect(
 )
 
 local function buymerchant()
-    if game.Players.LocalPlayer.Name == "GoDzBuLLeT" then
-        for i, v in next, game:GetService("Workspace")["travelling_merchant"].stand.items:GetChildren() do
-            local stritem = tostring(v)
-            item = string.gsub(stritem, "%d+", "")
-            if item == "star_remnant" then
-                local args = {
-                    [1] = stritem
-                }
+    for i, v in next, game:GetService("Workspace")["travelling_merchant"]:GetChildren() do
+        if v == "stand" then
+            for x, h in next, game:GetService("Workspace")["travelling_merchant"].stand.items:GetChildren() do
+                local stritem = tostring(h)
+                item = string.gsub(stritem, "%d+", "")
+                if item == "star_remnant" then
+                    local args = {
+                        [1] = stritem
+                    }
 
-                game:GetService("ReplicatedStorage").endpoints.client_to_server.buy_travelling_merchant_item:InvokeServer(
-                    unpack(args)
-                )
+                    game:GetService("ReplicatedStorage").endpoints.client_to_server.buy_travelling_merchant_item:InvokeServer(
+                        unpack(args)
+                    )
+                end
             end
         end
     end
