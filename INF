@@ -8,7 +8,7 @@ game:GetService("Players").LocalPlayer.Idled:connect(
 local function buymerchant()
     if game.Players.LocalPlayer.Name == "GoDzBuLLeT" then
         for i, v in next, game:GetService("Workspace")["travelling_merchant"]:GetChildren() do
-            if v == "stand" then
+            if v.Name == "stand" then
                 for x, h in next, game:GetService("Workspace")["travelling_merchant"].stand.items:GetChildren() do
                     local stritem = tostring(h)
                     item = string.gsub(stritem, "%d+", "")
