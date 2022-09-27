@@ -4,23 +4,26 @@ game:GetService("Players").LocalPlayer.Idled:connect(
         game:GetService("VirtualUser"):ClickButton2(Vector2.new())
     end
 )
---
 
---[[local function buymerchant()
-    for i, v in next, game:GetService("Workspace")["travelling_merchant"].stand.items:GetChildren() do
-        local stritem = tostring(v)
-        item = string.gsub(stritem, "%d+", "")
-        if item == "star_remnant" then
-            local args = {
-                [1] = stritem
-            }
+local function buymerchant()
+    if game.Players.LocalPlayer.Name == "GoDzBuLLeT" then
+        for i, v in next, game:GetService("Workspace")["travelling_merchant"].stand.items:GetChildren() do
+            local stritem = tostring(v)
+            item = string.gsub(stritem, "%d+", "")
+            if item == "star_remnant" then
+                local args = {
+                    [1] = stritem
+                }
 
-            game:GetService("ReplicatedStorage").endpoints.client_to_server.buy_travelling_merchant_item:InvokeServer(
-                unpack(args)
-            )
+                game:GetService("ReplicatedStorage").endpoints.client_to_server.buy_travelling_merchant_item:InvokeServer(
+                    unpack(args)
+                )
+            end
         end
     end
-end]] local function join() -- join teleporter
+end
+
+local function join() -- join teleporter
     local args = {
         [1] = "_lobbytemplategreen6"
     }
@@ -393,7 +396,7 @@ if game.PlaceId == 8304191830 then
     else
         while true do
             task.wait(5)
-            --buymerchant()
+            buymerchant()
             task.wait(1)
             join()
             task.wait(1)
